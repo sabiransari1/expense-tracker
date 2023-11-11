@@ -3,19 +3,20 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Box } from '@chakra-ui/react';
 
-export const IncomeChart = ({}) => {
-  // let incomeArr = Object.keys(income)?.map((key) => income[key]);
+export const IncomeChart = ({ income }) => {
+  let incomeKeysArr = Object.keys(income);
+  let incomeValuesArr = Object.values(income);
 
   return (
     <Box>
       <Doughnut
         data={{
-          labels: ['Salary', 'Gifts', 'Refunds'],
+          labels: incomeKeysArr,
           datasets: [
             {
               label: 'Income Chart',
-              data: [1, 2, 3],
-              backgroundColor: ["red","yellow","green"],
+              data: incomeValuesArr,
+              backgroundColor: ['red', 'yellow', 'green', 'wheat'],
             },
           ],
         }}

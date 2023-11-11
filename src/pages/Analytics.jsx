@@ -11,6 +11,8 @@ export const Analytics = () => {
   const currUser = useSelector((store) => store.userReducer.currUser);
   const usersData = useSelector((store) => store.userdataReducer.usersData);
   const [userData, setUserData] = useState([]);
+  const [income, setIncome] = useState([]);
+  const [expense, setExpense] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -28,6 +30,55 @@ export const Analytics = () => {
     }, []);
 
     setUserData((prev) => (prev = userDatax));
+  }, [usersData]);
+
+  useEffect(() => {
+    let incomeArr = userData?.reduce(
+      (acc, item) => {
+        if (item.task === 'Salary') {
+          acc.Salary += item.amount;
+        } else if (item.task === 'Gifts') {
+          acc.Gifts += item.amount;
+        } else if (item.task === 'Refunds') {
+          acc.Refunds += item.amount;
+        } else if (item.task === 'Other') {
+          acc.Other += item.amount;
+        }
+
+        return acc;
+      },
+      { Salary: 0, Gifts: 0, Refunds: 0, Other: 0 }
+    );
+    setIncome(incomeArr);
+
+    let expenseArr = userData?.reduce(
+      (acc, item) => {
+        if (item.task === 'Food') {
+          acc.Food += item.amount;
+        } else if (item.task === 'Shopping') {
+          acc.Shopping += item.amount;
+        } else if (item.task === 'Housing') {
+          acc.Housing += item.amount;
+        } else if (item.task === 'Bills') {
+          acc.Bills += item.amount;
+        } else if (item.task === 'Vehicle') {
+          acc.Vehicle += item.amount;
+        } else if (item.task === 'Lifestyle') {
+          acc.Lifestyle += item.amount;
+        }
+
+        return acc;
+      },
+      {
+        Food: 0,
+        Shopping: 0,
+        Housing: 0,
+        Bills: 0,
+        Vehicle: 0,
+        Lifestyle: 0,
+      }
+    );
+    setExpense(expenseArr);
   }, [usersData]);
 
   return (
@@ -64,11 +115,11 @@ export const Analytics = () => {
           mt={'2rem'}
         >
           <Box w={'50%'}>
-            <IncomeChart />
+            <IncomeChart income={income} />
           </Box>
 
           <Box w={'50%'}>
-            <ExpenseChart />
+            <ExpenseChart expense={expense} />
           </Box>
         </Flex>
       </Box>

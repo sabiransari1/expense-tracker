@@ -75,30 +75,27 @@ export const Tracker = () => {
                 borderRadius={'5px'}
                 p={'2rem'}
               >
-                {/* <Select>
-                  <option>Choose Either Income or Expense</option>
+                <Select onChange={(e) => setTask(e.target.value)}>
                   <option>Income</option>
                   <option>Expense</option>
-                </Select> */}
 
-                <Select onChange={(e) => setTask(e.target.value)}>
-                  <option value={''}>Income</option>
-                  <option value={'Salary'}>Salary</option>
-                  <option value={'Gifts'}>Gifts</option>
-                  <option value={'Refunds'}>Refunds</option>
-                  <option value={'Other'}>Other</option>
-                </Select>
-
-                <Select onChange={(e) => setTask(e.target.value)}>
-                  <option value={''}>Expense</option>
-                  <option value={'Food&Drinks'}>Food & Drinks</option>
-                  <option value={'Shopping'}>Shopping</option>
-                  <option value={'Housing'}>Housing</option>
-                  <option value={'Bills'}>Bills</option>
-                  <option value={'Vehicle&Transport'}>
-                    Vehicle & Transport
-                  </option>
-                  <option value={'Lifestyle'}>Lifestyle</option>
+                  {task === 'Income' ? (
+                    <>
+                      <option>Salary</option>
+                      <option>Gifts</option>
+                      <option>Refunds</option>
+                      <option>Other</option>
+                    </>
+                  ) : (
+                    <>
+                      <option>Food</option>
+                      <option>Shopping</option>
+                      <option>Housing</option>
+                      <option>Bills</option>
+                      <option>Vehicle</option>
+                      <option>Lifestyle</option>
+                    </>
+                  )}
                 </Select>
 
                 <Input
