@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Flex } from '@chakra-ui/react';
 import { Navbar } from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { IncomeChart } from '../components/IncomeChart';
 import { ExpenseChart } from '../components/ExpenseChart';
+import { useDispatch, useSelector } from 'react-redux';
+import { getData } from '../redux/userdata/action';
 
 export const Analytics = () => {
+  const currUser = useSelector((store) => store.userReducer.currUser);
+  const usersData = useSelector((store) => store.userdataReducer.usersData);
+  const [userData, setUserData] = useState([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getData);
+  }, []);
+
+  useEffect(() => {
+    let userDatax = usersData?.reduce((acc, item) => {
+      if (item.userId === currUser.id) {
+        acc.push(item);
+      }
+
+      return acc;
+    }, []);
+
+    setUserData((prev) => (prev = userDatax));
+  }, [usersData]);
+
   return (
     <Box>
       {/* 1 */}

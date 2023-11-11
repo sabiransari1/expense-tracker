@@ -1,20 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Flex } from '@chakra-ui/react';
 import { Navbar } from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { HistoryCard } from '../components/HistoryCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../redux/userdata/action';
+import { deleteUserdata } from '../redux/userdata/action';
 
 export const History = () => {
   const currUser = useSelector((store) => store.userReducer.currUser);
-  const userData = useSelector((store) => store.userdataReducer.userData);
+  const usersData = useSelector((store) => store.userdataReducer.usersData);
+  const [userData, setUserData] = useState([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getData);
   }, []);
+
+  useEffect(() => {
+    let userDatax = usersData?.reduce((acc, item) => {
+      if (item.userId === currUser.id) {
+        acc.push(item);
+      }
+
+      return acc;
+    }, []);
+
+    setUserData((prev) => (prev = userDatax));
+  }, [usersData]);
+
+  const handleDeleteUserdata = (id) => {
+    dispatch(deleteUserdata(id));
+
+    dispatch(getData);
+  };
 
   return (
     <Box>
@@ -45,8 +65,13 @@ export const History = () => {
           p={'2rem'}
           mt={'2rem'}
         >
-          {userData.length &&
-            userData?.map((item) => <HistoryCard key={item.id} {...item} />)}
+          {userData?.map((item) => (
+            <HistoryCard
+              key={item.id}
+              {...item}
+              handleDeleteUserdata={handleDeleteUserdata}
+            />
+          ))}
         </Box>
       </Box>
     </Box>

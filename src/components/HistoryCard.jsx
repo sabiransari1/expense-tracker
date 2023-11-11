@@ -1,7 +1,13 @@
 import React from 'react';
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 
-export const HistoryCard = ({ id, task, amount, date }) => {
+export const HistoryCard = ({
+  id,
+  task,
+  amount,
+  date,
+  handleDeleteUserdata,
+}) => {
   return (
     <Flex
       p={'1rem'}
@@ -32,7 +38,7 @@ export const HistoryCard = ({ id, task, amount, date }) => {
       {/* 2 */}
       <Flex direction={'column'} gap={'.2rem'}>
         <Heading>{amount}</Heading>
-        <Button>Edit</Button>
+        <Button onClick={() => handleDeleteUserdata(id)}>Edit</Button>
         <Button>Delete</Button>
       </Flex>
     </Flex>

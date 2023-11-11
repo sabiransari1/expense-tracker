@@ -3,12 +3,13 @@ import {
   DATA_REQUEST,
   GET_DATA_SUCCESS,
   POST_DATA_SUCCESS,
+  DELETE_DATA_SUCCESS,
 } from '../actionTypes';
 
 const initState = {
   isLoading: false,
   isError: false,
-  userData: new Array(),
+  usersData: new Array(),
 };
 
 export const userdataReducer = (state = initState, { type, payload }) => {
@@ -26,7 +27,11 @@ export const userdataReducer = (state = initState, { type, payload }) => {
     }
 
     case GET_DATA_SUCCESS: {
-      return { ...state, isLoading: false, isError: false, userData: payload };
+      return { ...state, isLoading: false, isError: false, usersData: payload };
+    }
+
+    case DELETE_DATA_SUCCESS: {
+      return { ...state, isLoading: false, isError: false };
     }
 
     default: {

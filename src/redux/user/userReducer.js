@@ -10,7 +10,7 @@ const initState = {
   isLoading: false,
   isError: false,
   isAuth: false,
-  currUser: new Array(),
+  currUser: new Object(),
   users: new Array(),
 };
 

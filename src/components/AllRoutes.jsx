@@ -21,9 +21,30 @@ export const AllRoutes = () => {
           </PrivateRoutes>
         }
       />
-      <Route path="/tracker" element={<Tracker />} />
-      <Route path="/analytics" element={<Analytics />} />
-      <Route path="/history" element={<History />} />
+      <Route
+        path="/tracker"
+        element={
+          <PrivateRoutes>
+            <Tracker />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/analytics"
+        element={
+          <PrivateRoutes>
+            <Analytics />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/history"
+        element={
+          <PrivateRoutes>
+            <History />
+          </PrivateRoutes>
+        }
+      />
     </Routes>
   );
 };

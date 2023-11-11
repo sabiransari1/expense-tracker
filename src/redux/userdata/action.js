@@ -3,6 +3,7 @@ import {
   DATA_REQUEST,
   GET_DATA_SUCCESS,
   POST_DATA_SUCCESS,
+  DELETE_DATA_SUCCESS,
 } from '../actionTypes';
 
 import axios from 'axios';
@@ -27,6 +28,18 @@ export const getData = async (dispatch) => {
     let res = await axios.get(`${url}`);
 
     dispatch({ type: GET_DATA_SUCCESS, payload: res.data });
+  } catch (error) {
+    dispatch({ type: DATA_ERROR });
+  }
+};
+
+export const deleteUserdata = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DATA_REQUEST });
+
+    let res = await axios.delete(`${url}/${id}`);
+
+    dispatch({ type: DELETE_DATA_SUCCESS });
   } catch (error) {
     dispatch({ type: DATA_ERROR });
   }

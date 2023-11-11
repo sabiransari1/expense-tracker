@@ -11,7 +11,7 @@ import {
 import { Navbar } from '../components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, isAuth } from '../redux/user/action';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,6 +20,7 @@ export const Login = () => {
 
   const dispatch = useDispatch();
   const toast = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getUsers);
@@ -28,23 +29,37 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    let userCheck = users.filter((item) => item.password === password);
+    let userCheck = users.reduce((acc, item) => {
+      if (item.email === email && item.password === password) {
+        acc = item;
+      }
 
-    if (userCheck.length) {
+      return acc;
+    }, {});
+
+    if (Object.keys(userCheck).length) {
       dispatch(isAuth(userCheck));
-      <Navigate to={'/dashboard'} />;
+      navigate('/dashboard');
+
+      toast({
+        title: 'User Login Successful',
+        status: 'success',
+        isClosable: true,
+        position: 'top',
+        duration: '1000',
+      });
+
+      setEmail('');
+      setPassword('');
+    } else {
+      toast({
+        title: 'Wrong Credentials, Please Login Again',
+        status: 'error',
+        isClosable: true,
+        position: 'top',
+        duration: '1000',
+      });
     }
-
-    setEmail('');
-    setPassword('');
-
-    toast({
-      title: 'User Login Successful',
-      status: 'success',
-      isClosable: true,
-      position: 'top',
-      duration: '1000',
-    });
   };
 
   return (
