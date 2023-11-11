@@ -66,7 +66,7 @@ export const Tracker = () => {
 
         {/* 2 */}
         <Flex p={'100px 5rem 5rem 5rem'} justify={'center'} align={'center'}>
-          <Box w={'100%'} p={'1rem'}>
+          <Box w={'50%'} p={'1rem'}>
             {/* <FormControl> */}
             <FormControl>
               <VStack
