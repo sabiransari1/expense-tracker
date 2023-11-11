@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, Flex } from '@chakra-ui/react';
 import { Navbar } from '../components/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Dashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/tracker');
+  }, []);
 
   return (
     <Box>

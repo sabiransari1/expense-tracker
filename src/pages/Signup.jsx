@@ -20,7 +20,9 @@ export const Signup = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const handleSignup = () => {
+  const handleSignup = (e) => {
+    e.preventDefault();
+
     let user = {
       fullName,
       email,
@@ -50,45 +52,42 @@ export const Signup = () => {
       <Flex p={'100px 5rem 5rem 5rem'} justify={'center'} align={'center'}>
         <Box w={'50%'} p={'1rem'}>
           {/* <FormControl> */}
-          <FormControl>
-            <VStack spacing={'1rem'}>
-              <Input
-                type={'text'}
-                placeholder={'Enter Full Name'}
-                variant={'filled'}
-                isRequired
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-              />
+          <form onSubmit={handleSignup}>
+            <FormControl>
+              <VStack spacing={'1rem'}>
+                <Input
+                  type={'text'}
+                  placeholder={'Enter Full Name'}
+                  variant={'filled'}
+                  isRequired
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                />
 
-              <Input
-                type={'email'}
-                placeholder={'Enter Email'}
-                variant={'filled'}
-                isRequired
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+                <Input
+                  type={'email'}
+                  placeholder={'Enter Email'}
+                  variant={'filled'}
+                  isRequired
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
 
-              <Input
-                type={'password'}
-                placeholder={'Enter Password'}
-                variant={'filled'}
-                isRequired
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+                <Input
+                  type={'password'}
+                  placeholder={'Enter Password'}
+                  variant={'filled'}
+                  isRequired
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-              <Button
-                type={'submit'}
-                w={'100%'}
-                bgColor={'#a0caba'}
-                onClick={handleSignup}
-              >
-                Signup
-              </Button>
-            </VStack>
-          </FormControl>
+                <Button type={'submit'} w={'100%'} bgColor={'#a0caba'}>
+                  Signup
+                </Button>
+              </VStack>
+            </FormControl>
+          </form>
         </Box>
       </Flex>
     </Box>

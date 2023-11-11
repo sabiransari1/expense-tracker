@@ -3,7 +3,14 @@ import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 
 export const HistoryCard = ({ id, task, amount, date }) => {
   return (
-    <Flex p={'1rem'} justify={'space-between'} align={'center'}>
+    <Flex
+      p={'1rem'}
+      justify={'space-between'}
+      align={'center'}
+      boxShadow={'rgba(0, 0, 0, 0.24) 0px 3px 8px;'}
+      borderRadius={'5px'}
+      mb={'1rem'}
+    >
       {/* 1 */}
       <Flex justify={'space-between'} align={'center'} gap={'1rem'}>
         {/* 1 */}

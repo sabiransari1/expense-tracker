@@ -25,7 +25,9 @@ export const Login = () => {
     dispatch(getUsers);
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+
     let userCheck = users.filter((item) => item.password === password);
 
     if (userCheck.length) {
@@ -54,36 +56,33 @@ export const Login = () => {
       <Flex p={'100px 5rem 5rem 5rem'} justify={'center'} align={'center'}>
         <Box w={'50%'} p={'1rem'}>
           {/* <FormControl> */}
-          <FormControl>
-            <VStack spacing={'1rem'}>
-              <Input
-                type={'email'}
-                placeholder={'Enter Email'}
-                variant={'filled'}
-                isRequired
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+          <form onSubmit={handleLogin}>
+            <FormControl>
+              <VStack spacing={'1rem'}>
+                <Input
+                  type={'email'}
+                  placeholder={'Enter Email'}
+                  variant={'filled'}
+                  isRequired
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
 
-              <Input
-                type={'password'}
-                placeholder={'Enter Password'}
-                variant={'filled'}
-                isRequired
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+                <Input
+                  type={'password'}
+                  placeholder={'Enter Password'}
+                  variant={'filled'}
+                  isRequired
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-              <Button
-                type={'submit'}
-                w={'100%'}
-                bgColor={'#a0caba'}
-                onClick={handleLogin}
-              >
-                Login
-              </Button>
-            </VStack>
-          </FormControl>
+                <Button type={'submit'} w={'100%'} bgColor={'#a0caba'}>
+                  Login
+                </Button>
+              </VStack>
+            </FormControl>
+          </form>
         </Box>
       </Flex>
     </Box>
